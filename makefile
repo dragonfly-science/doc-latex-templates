@@ -30,7 +30,7 @@ pkg:
 .PHONY: cleanClass clean
 
 cleanClass:
-	rm -f doc.sty doc-report.cls doc-article.cls doc-proposal.cls doc.pdf 
+	rm -f doc.sty doc-report.cls doc-article.cls doc.pdf beamerthemeDoc.sty
 		
 
 clean: cleanClass
