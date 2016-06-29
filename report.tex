@@ -26,18 +26,14 @@
 % internal caption.
 \usepackage{subcaption}
 
+% The text on the back cover
+% \backcover{%
+% \textcopyright\  Copyright 2016, New Zealand Department of Conservation
+% \bigskip\par
+% Published by Publishing Team, Department of Conservation, PO Box 10420, The Terrace, Wellington 6143, New Zealand.
+% \bigskip\par
+% In the interest of forest conservation, we suggest paperless electronic publishing.}
 
-% Optionally you can set an image to go on the titlepage. If this is not set it will
-% default to the wing image as a banner accross the top of the page. If an image is
-% included it should have a resulution of >= 600dpi, and ideally should be sized at
-% 210x110 mmm. Wider and taller images may not work correctly. If the image is shorter
-% than written, the width should not be reduced. 
-
-% Since the title image can be under a creative commons licence 
-% there is a command to attribute the image on the inside cover. The first argument
-% is the name of an image file showing the licence being used. The second is text 
-% describing the attribution. It may include a link, for example:
-% Don't use the leftimage, middleimage, or rightimage commands
 
 
 % Dragonfly reports all have a licence attached. The default dragonfly licence can
@@ -73,7 +69,8 @@ This has some boring text in it
 
 
 \begin{figure}[h]
-  %\includegraphics[width=40mm,height=40mm]{pattern}
+    \centering
+  \includegraphics[width=0.9\textwidth]{birdsbyboat}
   \caption{This is a caption that is longer than one line. It is important to test 
   this behavior as this a common feature of the doc templates.}
 \end{figure}
@@ -91,12 +88,12 @@ This has some boring text in it
   % Each subfigure need to know how wide it is. Otherwise it is the same as a normal
   % figure. 
   \begin{subfigure}{0.45\textwidth}
-  %\includegraphics[width=40mm,height=40mm]{pattern}
+  \includegraphics[width=\textwidth]{wca}
   \caption{This is a caption that is longer than one line. It is important to test 
   this behavior as this a common feature of the doc templates.}
 \end{subfigure}\qquad % it is nice to separate subfigures with a small space.
   \begin{subfigure}{0.45\textwidth}
-  %\includegraphics[width=40mm,height=40mm]{pattern}
+  \includegraphics[width=\textwidth]{birdsbyboat}
   \caption{This is a caption that is longer than one line. It is important to test 
   this behavior as this a common feature of the doc templates.}
 \end{subfigure}

@@ -28,9 +28,7 @@
 %<common>\ProvidesPackage{doc}[2016/06/29 v0.1 Common formatting requirements for Department of Conservation]
 %<report>\ProvidesClass{doc-report}[2016/06/29 v0.1 Report format for Department of Conservation]
 %<article>\ProvidesClass{doc-article}[2016/06/30 v0.1 Article format for Department of Conservation]
-%<letter>\ProvidesClass{doc-letter}[2016/06/30 v0.5 Letter format for Department of Conservation]
 %<beamer>\ProvidesClass{beamerthemeDragonfly}[2016/06/30 v0.1 Beamer format for Department of Conservation]
-%<proposal>\ProvidesClass{doc-proposal}[2016/06/30 v0.1 Proposal format for Department of Conservation]
 %<*driver>
 \documentclass{ltxdoc}
 \usepackage{doc}
@@ -63,9 +61,9 @@
 \makeatother
 \usepackage{titlesec}
 
-\titleformat{\section}{\color{alpine-tone}\fontsize{14pt}{16.8pt}\bfseries\neue\uppercase}{\thesection.}{1em}{}
-\titleformat{\subsection}{\fontsize{11pt}{13.2pt}\bfseries\neue}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}{\fontsize{11pt}{13.2pt}\bfseries\neue}{\thesubsubsection}{1em}{}
+\titleformat{\section}{\fontsize{15pt}{17.8pt}\bfseries}{\thesection.}{1em}{}
+\titleformat{\subsection}{\fontsize{12pt}{14.2pt}\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\fontsize{11pt}{13.2pt}\bfseries}{\thesubsubsection}{1em}{}
 \titlespacing{\section}{0pt}{\baselineskip}{0pt}
 \titlespacing{\subsection}{0pt}{\baselineskip}{0pt}
 \titlespacing{\subsubsection}{0pt}{\baselineskip}{0pt}
@@ -100,7 +98,7 @@
 %
 % \GetFileInfo{doc.dtx}
 %
-% \title{The \textsf{Dragonfly} formatting package}
+% \title{The \textsf{Department of Conservation} formatting package}
 % \author{Department of Conservation}
 % \maketitle
 %
@@ -214,8 +212,8 @@
 %    \begin{macrocode}
 %<*report>
 \RequirePackage[
-  left=52mm,
-  right=30mm,
+  left=45mm,
+  right=20mm,
   top=30mm,
 bottom=40mm
 ]{geometry}
@@ -283,9 +281,9 @@ bottom=40mm
 %    \end{macrocode}
 %
 %
-% All formats except for reports need are ragged right.
+% All formats are ragged right.
 %    \begin{macrocode}
-%<letter|article|beamer|proposal>\raggedright
+%<report|article|beamer|proposal>\raggedright
 %    \end{macrocode}
 %
 % Paragraphs are not indented, but there is extra spacing between them. 
@@ -299,29 +297,28 @@ bottom=40mm
 %    \begin{macrocode}
 %<*common>
 \RequirePackage[table]{xcolor}
-\definecolor{lake}{cmyk}{95,0,3,26}
-\definecolor{alpine}{cmyk}{80,95,0,0}
-\definecolor{sunset}{cmyk}{5,95,0,0}
-\definecolor{fauna}{cmyk}{0,75,90,0}
-\definecolor{flora}{cmyk}{50,0,100,0}
-\definecolor{kiwi}{cmyk}{75,0,100,68}
-\definecolor{honey}{cmyk}{0,0,100,30}
+\definecolor{alpine}{cmyk}{.31372,.37254,0,0}
+\definecolor{sunset}{cmyk}{.01960,.37254,0,0}
+\definecolor{fauna}{cmyk}{0,.29411,.35294,0}
+\definecolor{flora}{cmyk}{.19607,0,.39215,0}
+\definecolor{kiwi}{cmyk}{.29411,0,.39215,.26666}
+\definecolor{honey}{cmyk}{0,0,.39215,.11764}
 %% Hints
-\definecolor{lake-hint}{cmyk}{29,0,1,8} 
-\definecolor{alpine-hint}{cmyk}{24,29,0,0}
-\definecolor{sunset-hint}{cmyk}{2,29,0,0}
-\definecolor{fauna-hint}{cmyk}{0,22,27,0}
-\definecolor{flora-hint}{cmyk}{15,0,30,0}
-\definecolor{kiwi-hint}{cmyk}{0,22,30,20}
-\definecolor{honey-hint}{cmyk}{0,0,30,9}
+\definecolor{lake-hint}{cmyk}{.11372,0,.00392,.03137} 
+\definecolor{alpine-hint}{cmyk}{.09411,.11372,0,0}
+\definecolor{sunset-hint}{cmyk}{.00784,.11372,0,0}
+\definecolor{fauna-hint}{cmyk}{0,.08627,.10588,0}
+\definecolor{flora-hint}{cmyk}{.05882,0,.11764,0}
+\definecolor{kiwi-hint}{cmyk}{0,.08627,.11764,.07843}
+\definecolor{honey-hint}{cmyk}{0,0,.11764,.03529}
 %% Tones
-\definecolor{lake-tone}{cmyk}{95,0,3,50} 
-\definecolor{alpine-tone}{cmyk}{80,95,0,50}
-\definecolor{sunset-tone}{cmyk}{5,95,0,50}
-\definecolor{fauna-tone}{cmyk}{0,75,90,50}
-\definecolor{flora-tone}{cmyk}{50,0,100,50}
-\definecolor{kiwi-tone}{cmyk}{0,75,100,85}
-\definecolor{honey-tone}{cmyk}{0,18,100,50}
+\definecolor{lake-tone}{cmyk}{.37254,0,.01176,.19607} 
+\definecolor{alpine-tone}{cmyk}{.31372,.37254,0,.19607}
+\definecolor{sunset-tone}{cmyk}{.01960,.37254,0,.19607}
+\definecolor{fauna-tone}{cmyk}{0,.29411,.35294,.19607}
+\definecolor{flora-tone}{cmyk}{.19607,0,.39215,.19607}
+\definecolor{kiwi-tone}{cmyk}{0,.29411,.39215,.33333}
+\definecolor{honey-tone}{cmyk}{0,.07058,.39215,.19607}
 %</common>
 %    \end{macrocode}
 %
@@ -341,9 +338,9 @@ bottom=40mm
 %
 %    \begin{macrocode}
 %<*report>
-\titleformat{\section}{\color{alpine-tone}\fontsize{14pt}{16.8pt}\bfseries\neue\uppercase}{\thesection.}{1em}{}
-\titleformat{\subsection}{\fontsize{11pt}{13.2pt}\bfseries\neue}{\thesubsection}{1em}{}
-\titleformat{\subsubsection}{\fontsize{11pt}{13.2pt}\bfseries\neue}{\thesubsubsection}{1em}{}
+\titleformat{\section}{\fontsize{15pt}{17.8pt}\bfseries}{\thesection.}{1em}{}
+\titleformat{\subsection}{\fontsize{12pt}{14.2pt}\bfseries}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\fontsize{11pt}{13.2pt}\bfseries}{\thesubsubsection}{1em}{}
 \titlespacing{\section}{0pt}{\baselineskip}{0pt}
 \titlespacing{\subsection}{0pt}{\baselineskip}{0pt}
 \titlespacing{\subsubsection}{0pt}{\baselineskip}{0pt}
@@ -790,40 +787,21 @@ bottom=40mm
 %<report>\newcommand{\reportmonth}[1]{}
 %    \end{macrocode}
 %  
-% Since the report title image is supposed to be a mixture of three images, we 
-% may be required to cite the source of the images. This is also done on 
-% the inside cover. We create three commands that take a licence image name
-% and a source to cite the images. If no images are cited the block does not appear.
-% In the AEBR these do nothing. 
+%    \begin{macrocode}
+%
+% Each report may contain a copyright notice on the back of the cover,
 %
 %    \begin{macrocode}
 %<*report>
-\RequirePackage{lettrine}
-\newcommand{\singleimage}[2]{%
-\renewcommand{\@imagereferences}{Cover image:}
-\renewcommand{\@singleimage}{\lettrine[lines=2,findent=6pt,nindent=0pt]{\includegraphics[height=1.8ex,keepaspectratio]{#1}}{}{\normalfont #2}}
-}
-
-
-\newcommand{\@singleimage}{}
-\newcommand{\@leftimage}{}
-\newcommand{\@middleimage}{}
-\newcommand{\@rightimage}{}
-
-\def\@imagereferences{}
-%</report>
-%
-% Each report may contain a copyright notice. This has an image for the licence,
-% as well as text. 
-%
-%    \begin{macrocode}
-%<*report>
-\newcommand{\licence}[1]{\renewcommand{\@licence}{#1}}
-\newcommand{\@licence}{}
+\newcommand{\backcover}[1]{\renewcommand{\@backcover}{#1}}
+\newcommand{\@backcover}{
+\textcopyright\  Copyright \the\year, New Zealand Department of Conservation
+\bigskip\par
+In the interest of forest conservation, we suggest paperless electronic publishing.}
 %</report>
 %    \end{macrocode}
 %
-% AEBR documens require and ISSN, ISBN and report number. All of these must have 
+% Some report documens require and ISSN, ISBN and report number. All of these must have 
 % sensible defaults for before they are finished. These should not be implemented
 % in report.
 %    \begin{macrocode}
@@ -894,7 +872,7 @@ bottom=40mm
 %    \begin{macrocode}
 %<*report|proposal>
 \clearpage
-\newgeometry{top=135mm,bottom=32mm,right=30mm,left=30mm}
+\newgeometry{top=105mm,bottom=32mm,right=40mm,left=40mm}
 \thispagestyle{empty}
 %</report|proposal>
 %    \end{macrocode}
@@ -904,27 +882,27 @@ bottom=40mm
 % title image command is defined. 
 %    \begin{macrocode}
 %<*report|proposal>
-\begin{textblock*}{\paperwidth}(0mm,10mm)
-    % \includegraphics[width=\paperwidth]{\@titleimage}
+\begin{textblock*}{38mm}(173mm,0mm)
+   \includegraphics[width=38mm]{DOC_split-logo_shield.png}
 \end{textblock*}
 %</report|proposal>
 %    \end{macrocode}
 %
-% The main text is the title of the document in large black neue. It also has some
-% extra spacing following it.
+% The main text is the title of the document in large flora-tone Archer Bold.
+% It also has some extra spacing following it.
 %    \begin{macrocode}
 %<*report|proposal>
-{\raggedright \bf \neue \fontsize{23}{27.5}\selectfont \nohyphens{\@title}\par }
-\vspace*{8mm}
+{\raggedright \bf \color{kiwi-tone} \fontsize{25}{27.5}\selectfont \nohyphens{\@title}\par }
+\vspace*{10mm}
 \vspace*{-\baselineskip}
 \vspace*{-\parskip}
 
 %</report|proposal>
 %    \end{macrocode}
 %
-% The main title is followed by the subtitle in alpine-tone.
+% The main title is followed by the subtitle in flora.
 %    \begin{macrocode}
-%<report|proposal>{\raggedright \bf \color{alpine-tone} \fontsize{11pt}{13.5}\selectfont \nohyphens{\@subtitle}\par}
+%<report|proposal>{\raggedright \bf \color{kiwi-tone} \fontsize{14pt}{15.5}\selectfont \nohyphens{\@subtitle}\par}
 %    \end{macrocode}
 %
 %    If you want to put extra content in, you can use the extratitlepage command.
@@ -936,40 +914,21 @@ bottom=40mm
       {\@extratitlepage}%
       \fi%
 \vfill%
-\hspace*{90mm}%
-\begin{minipage}[h]{65mm}
-  \fontsize{7.5pt}{9pt}\selectfont\neue
-  {
-    \renewcommand{\and}{\\}
-  \begin{tabular}{l}
-  \textbf{\@authorslabel:}\\
-    \@author
-  \end{tabular}
-  }
-    \vspace{1mm}
-
-    \noindent\rule{51mm}{0.1mm}
-
-    \vspace{4mm}
-
-    \hspace{15mm}
-    \parbox{44mm}{\fontsize{7.5pt}{9pt}\selectfont PO Box 27535, Wellington 6141 \\ 
-                 New Zealand \\ 
-                 \href{www.dragonfly.co.nz}{\bfseries\color{alpine-tone}\neue dragonfly.co.nz}}
-    
-\end{minipage}
+\begin{textblock*}{60mm}(10mm,269mm)
+\includegraphics[trim=-30mm -30mm 0mm 0mm,clip,width=60mm]{newzealand-government}
+\end{textblock*}
 %</report|proposal>
 %    \end{macrocode}
 %    
 % The Dragonfly logo is placed next to the author block. 
 %    \begin{macrocode}
 %<*report|proposal>
-\begin{textblock*}{59mm}(68mm,253mm)
-  % \includegraphics[width=\textwidth]{logo}
+\begin{textblock*}{38mm}(165mm,269mm)
+  \includegraphics[width=\textwidth]{DOC_split-logo_text}
 \end{textblock*}
 %</report|proposal>
 %    \end{macrocode}
-%
+%  
 % This finishes the title page, and now the inside cover begins.
 % This is a normal size page with no footer and a patterned background. 
 % All text on this page is aligned to the bottom. 
@@ -978,40 +937,23 @@ bottom=40mm
 
 \restoregeometry
 \clearpage
+\newgeometry{top=105mm,bottom=30mm,right=20mm,left=20mm}
 \thispagestyle{empty}
 
 \vspace*{\fill}
 %</report|proposal>
 %    \end{macrocode}
 %
+% The license command text goes at the bottom of the fist page
 %    \begin{macrocode}
 %<*report>
-{\neue \color{alpine-tone} \fontsize{11pt}{13.2pt}\selectfont \textbf{Cover Notes}}
-
-To be cited as:
-
-{
-
-  \begin{refsection}[\jobname-self.bib]
-  \renewcommand{\\}{}
-  \renewcommand*{\multinamedelim}{;\space}
-  \renewcommand*{\finalnamedelim}{;\space}%
-  \renewcommand{\blx@maxcitenames}{25} %The number of authors here can be large
-  \citename{this}[article]{author}\ (\citefield{this}{year}).\ \citefield{this}{title},\ \pageref{LastPage}\ pages.\ \ifdefempty{\@citationnote}{}{\@citationnote.}
-  \end{refsection}
-}
-
-\@licence
-
-\ifx\@imagereferences\@empty%
-\relax%
-\else%
-\@imagereferences
-\@singleimage
-\fi
+\begin{minipage}{\textwidth}
+\@backcover
+\end{minipage}
 
 %</report>
 %<*report|proposal>
+\restoregeometry
 \clearpage
 \pagestyle{plain}
 }
@@ -1159,12 +1101,12 @@ To be cited as:
 % Dection heading are always shown in capitals
 % in the contents page. This involves rebinding contents line, so that when the 
 % title is used to construct a hyperref url, it doesn't break the url. This is
-% used in report and AEBR.
+% used in report.
 %
 %    \begin{macrocode}
 %<*report>
 \let\doc@contentsline=\contentsline
-\renewcommand\contentsline[4]{\doc@contentsline{#1}{\ifstrequal{#1}{section}{\MakeUppercase{#2}}{#2}}{#3}{#4}}
+\renewcommand\contentsline[4]{\doc@contentsline{#1}{#2}{#3}{#4}}
 %</report>
 %    \end{macrocode}
 %
@@ -1180,7 +1122,7 @@ To be cited as:
 %
 %    \begin{macrocode}
 %<*report>
-\renewcommand{\cfttoctitlefont}{\color{alpine-tone}\fontsize{14pt}{16.8pt}\bfseries\sffamily}
+\renewcommand{\cfttoctitlefont}{\fontsize{14pt}{16.8pt}\bfseries}
 \addto\captionsenglish{%
   \renewcommand{\contentsname}{CONTENTS}
 }
@@ -1196,7 +1138,7 @@ To be cited as:
 %
 %    \begin{macrocode}
 %<*report>
-\newcommand{\doc@pagefont}{\fontsize{11pt}{13.2pt}\bfseries\sffamily\color{gray}}
+\newcommand{\doc@pagefont}{\fontsize{11pt}{13.2pt}}
 \renewcommand{\cftsecpagefont}{\doc@pagefont}
 \renewcommand{\cftsubsecpagefont}{\doc@pagefont}
 \renewcommand{\cftsubsubsecpagefont}{\doc@pagefont}
@@ -1218,11 +1160,11 @@ To be cited as:
 %</report>
 %    \end{macrocode}
 %
-%   All levels of heading have the same font for being written in. Bold, black neue. 
+%   All levels of heading have the same font for being written in.
 %
 %    \begin{macrocode}
 %<*report>
-\newcommand{\doc@tocfont}{\fontsize{11pt}{13.2pt}\bfseries\sffamily}
+\newcommand{\doc@tocfont}{\fontsize{11pt}{13.2pt}}
 
 \renewcommand{\cftsecfont}{\doc@tocfont}
 \renewcommand{\cftsubsecfont}{\doc@tocfont}
@@ -1270,8 +1212,8 @@ To be cited as:
 %    \begin{macrocode}
 %<*report>
 \let\oldfigure\figure
-\newcommand{\newfigurehead}{\hspace{-22mm}
-  \addtolength{\textwidth}{22mm}
+\newcommand{\newfigurehead}{\hspace{0mm}
+  \addtolength{\textwidth}{0mm}
   \begin{minipage}[t]{\textwidth}}
 \def\figure{\@ifnextchar[\figure@i \figure@ii}
 \def\figure@i[#1]{\oldfigure[#1]\newfigurehead}
@@ -1287,8 +1229,8 @@ To be cited as:
 %    \begin{macrocode}
 %<*report>
 \let\oldtable\table
-\newcommand{\newtablehead}{\hspace{-22mm}
-  \addtolength{\textwidth}{22mm}
+\newcommand{\newtablehead}{\hspace{0mm}
+  \addtolength{\textwidth}{0mm}
   \begin{minipage}[t]{\textwidth}}
 \def\table{\@ifnextchar[\table@i \table@ii}
 \def\table@i[#1]{\oldtable[#1]\newtablehead}
@@ -1506,9 +1448,9 @@ use, and build upon this work, provided credit is given to the original source.
 %<*report>
 \g@addto@macro\appendices{
 %</report>
-%<report>\titleformat{\section}{\color{alpine-tone}\fontsize{14pt}{16.8pt}\bfseries\neue\uppercase}{APPENDIX \thesection }{1em}{}
+%<report>\titleformat{\section}{\fontsize{14pt}{16.8pt}\bfseries\neue}{Appendix \thesection }{1em}{}
 %<*report>
-\titleformat{\section}{\bfseries\sffamily}{APPENDIX \thesection }{1em}{}
+\titleformat{\section}{\bfseries\sffamily}{Appendix \thesection }{1em}{}
 \renewcommand{\theequation}{\thesection-\arabic{equation}}
 \renewcommand{\thetable}{\thesection-\arabic{table}}
 \renewcommand{\thefigure}{\thesection-\arabic{figure}}
