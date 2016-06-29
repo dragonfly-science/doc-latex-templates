@@ -1,7 +1,7 @@
 %We start by telling LaTeX that this is a dragonfly report. Note that this format
 % is interchangeable with AEBR. Optionally we can say that
 % it is a draft (which will add watermarks, line number and extra line spacing). 
-\documentclass[draft]{dragonfly-report}
+\documentclass{doc-report}
 
 % A report requires two titles. The first is the short title. This is used for the 
 % footer text. The second is the full title. This goes on the front of the report. 
@@ -32,20 +32,17 @@
 % included it should have a resulution of >= 600dpi, and ideally should be sized at
 % 210x110 mmm. Wider and taller images may not work correctly. If the image is shorter
 % than written, the width should not be reduced. 
-%\titleimage{pattern}
 
 % Since the title image can be under a creative commons licence 
 % there is a command to attribute the image on the inside cover. The first argument
 % is the name of an image file showing the licence being used. The second is text 
 % describing the attribution. It may include a link, for example:
-\singleimage{by-nc-nd}{https://www.flickr.com/photos/naoc0804/13923065676/in/explore-2014-04-20}
 % Don't use the leftimage, middleimage, or rightimage commands
 
 
 % Dragonfly reports all have a licence attached. The default dragonfly licence can
 % be used with \bydragonfly. The crown licence can be used with \bycrown. 
 % You can also directly enter whichever licence is appropriate. 
-\licence{\bydragonfly}
 
 % The lipsum package should not be used in a real report. It is used to generate
 % filler text to test templates.
@@ -56,13 +53,6 @@
 
 % The actual document contents begin after here. 
 \begin{document}
-
-% Documents that are provided to MPI working  groups require a special cover sheet
-% when they are printed as a draft. Including this file will create such a title sheet
-% when the draft option is enabled. Do to the range of working groups and goals that 
-% need to be acheived, users may need to edit the mpiDraftCover.tex file themselves
-% to put in the correct details. 
-\input{mpiDraftCover}
 
 % Generates the title page
 \maketitle
@@ -83,9 +73,9 @@ This has some boring text in it
 
 
 \begin{figure}[h]
-  \includegraphics[width=40mm,height=40mm]{pattern}
-  \caption{This is a caption that is longer than one line. It is improtant to test 
-  this behavoir as this a common feature of the dragon fly templates.}
+  %\includegraphics[width=40mm,height=40mm]{pattern}
+  \caption{This is a caption that is longer than one line. It is important to test 
+  this behavior as this a common feature of the doc templates.}
 \end{figure}
 
 \subsection{Details}
@@ -101,14 +91,14 @@ This has some boring text in it
   % Each subfigure need to know how wide it is. Otherwise it is the same as a normal
   % figure. 
   \begin{subfigure}{0.45\textwidth}
-  \includegraphics[width=40mm,height=40mm]{pattern}
-  \caption{This is a caption that is longer than one line. It is improtant to test 
-  this behavoir as this a common feature of the dragon fly templates.}
+  %\includegraphics[width=40mm,height=40mm]{pattern}
+  \caption{This is a caption that is longer than one line. It is important to test 
+  this behavior as this a common feature of the doc templates.}
 \end{subfigure}\qquad % it is nice to separate subfigures with a small space.
   \begin{subfigure}{0.45\textwidth}
-  \includegraphics[width=40mm,height=40mm]{pattern}
-  \caption{This is a caption that is longer than one line. It is improtant to test 
-  this behavoir as this a common feature of the dragon fly templates.}
+  %\includegraphics[width=40mm,height=40mm]{pattern}
+  \caption{This is a caption that is longer than one line. It is important to test 
+  this behavior as this a common feature of the doc templates.}
 \end{subfigure}
 % The overall figure also gets a caption
 \caption{A figure of figures}
@@ -131,7 +121,7 @@ The interesting ones are:
   \item \citet{baker_nzclassification_2010}
   \item \citep{doc_sealion_2009}
   \item \parencite{gales_phocarctos_2008}
-  \item \nptextcite{ mpi_review_2012}
+  \item \nptextcite{mpi_review_2012}
   %\item \fullcite{acap_summary_2011b}
   %\item \fullcitebib{acap_summary_2011b}
   \item \citeyear{robertson_population_2011}
