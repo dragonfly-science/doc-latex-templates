@@ -1,0 +1,99 @@
+\documentclass[xcolor={table}]{beamer}
+
+\usetheme{Dragonfly}
+
+\title{New Zealand sea lion captures in commercial fisheries}
+\projectcode{ABC2018-02}
+\subtitle{Which is awesome}
+\author{Isaac Newton}
+\date{\today}
+
+\titlefooter{Cool! But this has to deal with being really long
+and really kind of multiline. The problem is how important this is. so it needs to be
+really kind of super long!}
+\pagefooter{Only a draft - Don't Look!}
+\begin{document}
+
+\titleslide
+
+\section{Part 1}
+
+\begin{frame}
+  \frametitle{The fun times of \LaTeX}
+  Some slide content
+\begin{itemize}
+  \item \the\topmargin
+  \item \the\headheight
+  \item \the\headsep
+  \item \the\textheight
+  \item \the\footskip
+  \item \the\paperheight
+\end{itemize}
+\end{frame}
+
+\imageslide{pattern}[w]%[ other includegraphics options go here ]
+
+
+{
+  \usebackgroundtemplate{\includegraphics[width=\paperwidth,height=\paperheight]{damselfly}}
+  \begin{frame}{}{}
+    {\color{logo-blue}Some text on the slide. Titles ommited for fun.}
+  \end{frame}
+}
+\section{Sheep}
+
+\begin{frame}{This frame has no title, just words and a list. But it is still actually
+  too short}
+  Only image slides have no \textbf{margins} and are full of a figure
+
+
+\begin{enumerate}
+  \item Hello
+  \item Me too
+\end{enumerate}
+\begin{itemize}
+  \item \the\paperheight
+  \item \the\footskip
+  \item \the\textheight
+\end{itemize}
+ \end{frame}
+
+ \begin{frame}{Testing}{Subtitles}
+This frame has a table\footnote{And a long descriptive footnote that shows up at the bottom 
+of the page. This should not overlap the logo image.}
+
+\begin{table}[htbp]
+\caption{Case-studies}
+\centering
+\begin{tabular}{llrllllll}
+\toprule
+\multicolumn{4}{c}{Full}  \\
+
+\cmidrule(r){4-5}
+\cmidrule(r){6-7}
+
+Name & Name & Name & Name & Name. & Name & Name.  \\
+\midrule
+John & Doe & 7.5 \\
+Richard & Miles & 2.1\\
+\bottomrule
+\end{tabular}
+\label{case-studies}
+\end{table}
+
+
+ \end{frame}
+
+
+ \begin{frame}{Maths}
+$$
+\int f(x) = \frac{4x \frac{\mathrm{d}x}{\textbf{d}y}}{y} 
+$$
+$$
+\alpha\beta\gamma|\epsilon\theta\tau \mathbb{R}
+$$
+$$
+\mu_i \sim  N \left(\nu,\tau\right)
+$$
+ \end{frame}
+\end{document}

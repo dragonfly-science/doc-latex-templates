@@ -1,0 +1,1524 @@
+% \iffalse meta-comment
+% The MIT License (MIT)
+% 
+% Copyright (c) 2016 Department of Conservation
+% 
+% Permission is hereby granted, free of charge, to any person obtaining a copy
+% of this software and associated documentation files (the "Software"), to deal
+% in the Software without restriction, including without limitation the rights
+% to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+% copies of the Software, and to permit persons to whom the Software is
+% furnished to do so, subject to the following conditions:
+% 
+% The above copyright notice and this permission notice shall be included in all
+% copies or substantial portions of the Software.
+% 
+% THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+% IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+% FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+% AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+% LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+% OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+% SOFTWARE.
+% \fi
+%
+% \iffalse
+%<common|report|article|letter|beamer|proposal>\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+%
+%<common>\ProvidesPackage{doc}[2016/06/29 v0.1 Common formatting requirements for Department of Conservation]
+%<report>\ProvidesClass{doc-report}[2016/06/29 v0.1 Report format for Department of Conservation]
+%<article>\ProvidesClass{doc-article}[2016/06/30 v0.1 Article format for Department of Conservation]
+%<letter>\ProvidesClass{doc-letter}[2016/06/30 v0.5 Letter format for Department of Conservation]
+%<beamer>\ProvidesClass{beamerthemeDragonfly}[2016/06/30 v0.1 Beamer format for Department of Conservation]
+%<proposal>\ProvidesClass{doc-proposal}[2016/06/30 v0.1 Proposal format for Department of Conservation]
+%<*driver>
+\documentclass{ltxdoc}
+\usepackage{doc}
+\usepackage[toc]{multitoc}
+
+\usepackage{tocloft}
+\setcounter{tocdepth}{2}
+
+\renewcommand{\contentsname}{CONTENTS}
+\makeatletter
+\newcommand\doc@pagefont{\fontsize{9pt}{13.2pt}\bfseries\sffamily\color{gray}}
+\renewcommand{\cftsecpagefont}{\doc@pagefont}
+\renewcommand{\cftsubsecpagefont}{\doc@pagefont}
+\renewcommand{\cftsubsubsecpagefont}{\doc@pagefont}
+\renewcommand{\cftdot}{-}
+\renewcommand{\cftdotsep}{1}
+\newcommand{\doc@leader}{\phantom{m}\color{gray}\tiny \cftdotfill{\cftdotsep}\phantom{m}}
+
+\renewcommand{\cftsecleader}{\doc@leader}
+\renewcommand{\cftsubsecleader}{\doc@leader}
+\renewcommand{\cftsubsubsecleader}{\doc@leader}
+\newcommand{\doc@tocfont}{\fontsize{9pt}{13.2pt}\bfseries\sffamily}
+
+\renewcommand{\cftsecfont}{\doc@tocfont}
+\renewcommand{\cftsubsecfont}{\doc@tocfont}
+\renewcommand{\cftsubsubsecfont}{\doc@tocfont}
+\setlength{\cftparskip}{1ex}
+\setlength{\cftbeforesecskip}{2ex}
+
+\makeatother
+\usepackage{titlesec}
+
+\titleformat{\section}{\color{alpine-tone}\fontsize{14pt}{16.8pt}\bfseries\neue\uppercase}{\thesection.}{1em}{}
+\titleformat{\subsection}{\fontsize{11pt}{13.2pt}\bfseries\neue}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\fontsize{11pt}{13.2pt}\bfseries\neue}{\thesubsubsection}{1em}{}
+\titlespacing{\section}{0pt}{\baselineskip}{0pt}
+\titlespacing{\subsection}{0pt}{\baselineskip}{0pt}
+\titlespacing{\subsubsection}{0pt}{\baselineskip}{0pt}
+\EnableCrossrefs
+\CodelineIndex
+\RecordChanges
+\begin{document}
+  \DocInput{doc.dtx}
+\end{document}
+%</driver>
+%\fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% \changes{0.1}{2016/06/30}{Initial Version}
+%
+% \GetFileInfo{doc.dtx}
+%
+% \title{The \textsf{Dragonfly} formatting package}
+% \author{Department of Conservation}
+% \maketitle
+%
+% \begin{abstract}
+%  This is a set of classes that are used to format documents according the 
+%  Department of Conservation formatting requirements. There are a range of different
+%  document classes as well as a style file which provides all of the common 
+%  implementation.
+% \end{abstract}
+% \clearpage
+% \tableofcontents
+%  \clearpage
+% \section{Class and Package Options}
+%
+% All options are passed down to the common doc layer. 
+%
+% Since we intend on manually hiding certain options we need a command to 
+% clear it from the global options list. This is taken from 
+% \url{http://tex.stackexchange.com/questions/33245/disabling-the-draft-option-in-a-package}.
+%    \begin{macrocode}
+%<*letter|article|report|proposal|beamer>
+\def\@clearglobaloption#1{%
+  \def\@tempa{#1}%
+  \def\@tempb{\@gobble}%
+  \@for\next:=\@classoptionslist\do
+    {\ifx\next\@tempa
+       \message{Cleared  option \next\space from global list}%
+     \else
+       \edef\@tempb{\@tempb,\next}%
+     \fi}%
+  \let\@classoptionslist\@tempb
+  \expandafter\ifx\@tempb\@gobble
+    \let\@classoptionslist\@empty
+  \fi}
+%</letter|article|report|proposal|beamer>
+%    \end{macrocode}
+%
+% The doc package needs to recognise the draft option, and just
+% give it to ifdraft.
+%
+%    \begin{macrocode}
+%<*common>
+\DeclareOption{draft}{
+  \PassOptionsToPackage{\CurrentOption}{ifdraft}
+}
+\ProcessOptions\relax
+%</common>
+%    \end{macrocode}
+% 
+% The rest are just default behaviour. 
+%    \begin{macrocode}
+%<*letter|article|report|proposal|beamer>
+\DeclareOption{draft}{
+  \PassOptionsToPackage{\CurrentOption}{doc}
+  \@clearglobaloption{draft}
+}
+\ProcessOptions\relax
+%</letter|article|report|proposal|beamer>
+%    \end{macrocode}
+%
+% \section{Templates}
+% Each different class is based on a different template. The following
+% styles have classes implemented:
+%
+% \begin{itemize}
+% \item Dragonfly report
+% \item Dragonfly letter
+% \item Dragonfly article
+% \item Dragonfly letter
+% \item Dragonfly beamer theme
+% \item Aquatic Environment and Biodiversity Report
+% \end{itemize}
+%
+% The basic structure is the same as the base latex article class
+% with small changes to correct the 
+% theme. The beamer theme is based on the default with inner theme circles,
+% and the color theme using Dragonfly colours.
+%
+%    \begin{macrocode}
+%<letter|article|report>\LoadClass[a4paper,final,11pt]{article}
+%<proposal>\LoadClass[a4paper,11pt]{doc-report}
+%<beamer>\mode<presentation>
+%<beamer>\useinnertheme{circles}
+%<beamer>\usecolortheme[RGB={28,152,196}]{structure}
+%    \end{macrocode}
+%
+%
+% All of the classese use a commmon style to share general definitions.
+% This is provided by the doc style.
+%    \begin{macrocode}
+%<report|article|letter|beamer>\RequirePackage{doc}
+%    \end{macrocode}
+%
+% \section{Page Layout}
+%
+% \subsection{Letter and Article}
+% Letters and articles are very similar looking formats. They have the same margins
+% which match what has been used historically. 
+%    \begin{macrocode}
+%<*letter|article>
+\RequirePackage[
+    hmargin={51mm,30mm},
+    vmargin={26mm,40mm}]{geometry}
+%</letter|article>
+%    \end{macrocode}
+%
+% \subsection{Report}
+%
+% The report template has been created by a designer and has very strict 
+% rules about exactly what all the margins are.
+%    \begin{macrocode}
+%<*report>
+\RequirePackage[
+  left=52mm,
+  right=30mm,
+  top=30mm,
+bottom=40mm
+]{geometry}
+%</report>
+%    \end{macrocode}
+%
+%
+% \section{Fonts}
+%
+% The Department of Conservation reports in general use Archer and
+% Omnes as their fonts.  \begin{macrocode}
+%<*common>
+\RequirePackage{fontspec}
+\setmainfont[Mapping=tex-text,
+    ItalicFont     = {Archer Book Italic},
+    BoldFont       = {Archer Bold},
+    BoldItalicFont = {Archer Bold Italic}]{Archer Book}
+
+\newfontfamily\neue[Mapping=tex-text,
+    Numbers=Monospaced,
+    ItalicFont     = {Helvetica Neue LT Std 76 Italic},
+    BoldFont       = {Helvetica Neue LT Std 76 Bold},
+    BoldItalicFont = {Helvetica Neue LT Std 76 Bold Italic}]{Helvetica Neue LT Std 55 Roman}
+    
+\setsansfont[Mapping=tex-text,
+    Numbers=Monospaced,
+    ItalicFont     = {Helvetica Neue LT Std 76 Italic},
+    BoldFont       = {Helvetica Neue LT Std 76 Bold},
+    BoldItalicFont = {Helvetica Neue LT Std 76 Bold Italic}]{Helvetica Neue LT Std 55 Roman}
+
+\setmathrm[Mapping=tex-text,
+    Numbers=Monospaced,
+    ItalicFont     = {Helvetica Neue LT Std 76 Italic},
+    BoldFont       = {Helvetica Neue LT Std 76 Bold},
+    BoldItalicFont = {Helvetica Neue LT Std 76 Bold Italic}]{Helvetica Neue LT Std 55 Roman}
+\setmathsf[Mapping=tex-text,
+    Numbers=Monospaced,
+    ItalicFont     = {Helvetica Neue LT Std 76 Italic},
+    BoldFont       = {Helvetica Neue LT Std 76 Bold},
+    BoldItalicFont = {Helvetica Neue LT Std 76 Bold Italic}]{Helvetica Neue LT Std 55 Roman}
+\setmathtt[Mapping=tex-text, 
+    Numbers=Monospaced,
+    ItalicFont     = {Helvetica Neue LT Std 76 Italic},
+    BoldFont       = {Helvetica Neue LT Std 76 Bold},
+    BoldItalicFont = {Helvetica Neue LT Std 76 Bold Italic}]{Helvetica Neue LT Std 55 Roman}
+%</common>
+%    \end{macrocode}
+%
+%
+% We also set the fontsize to be 10pt. 
+%
+%    \begin{macrocode}
+%<common>\renewcommand{\normalsize}{\fontsize{9.5pt}{11pt}\selectfont}
+%    \end{macrocode}
+%
+% Suppress hyphenation, and try to keep the lines justified.
+%  \url{http://tex.stackexchange.com/questions/31301/how-to-reduce-the-number-of-hyphenation}
+%
+%    \begin{macrocode}
+%<*report|proposal>
+\pretolerance=5000
+\tolerance=2000 
+\emergencystretch=10pt
+%</report|proposal>
+%    \end{macrocode}
+%
+%
+% All formats except for reports need are ragged right.
+%    \begin{macrocode}
+%<letter|article|beamer|proposal>\raggedright
+%    \end{macrocode}
+%
+% Paragraphs are not indented, but there is extra spacing between them. 
+%    \begin{macrocode}
+%<common>\setlength{\parskip}{3mm}
+%<common>\setlength{\parindent}{0mm}
+%    \end{macrocode}
+%
+% \section{Coloring}
+% Dragonfly uses a set of common custom colours. These are defined as follows. 
+%    \begin{macrocode}
+%<*common>
+\RequirePackage[table]{xcolor}
+\definecolor{lake}{cmyk}{95,0,3,26}
+\definecolor{alpine}{cmyk}{80,95,0,0}
+\definecolor{sunset}{cmyk}{5,95,0,0}
+\definecolor{fauna}{cmyk}{0,75,90,0}
+\definecolor{flora}{cmyk}{50,0,100,0}
+\definecolor{kiwi}{cmyk}{75,0,100,68}
+\definecolor{honey}{cmyk}{0,0,100,30}
+%% Hints
+\definecolor{lake-hint}{cmyk}{29,0,1,8} 
+\definecolor{alpine-hint}{cmyk}{24,29,0,0}
+\definecolor{sunset-hint}{cmyk}{2,29,0,0}
+\definecolor{fauna-hint}{cmyk}{0,22,27,0}
+\definecolor{flora-hint}{cmyk}{15,0,30,0}
+\definecolor{kiwi-hint}{cmyk}{0,22,30,20}
+\definecolor{honey-hint}{cmyk}{0,0,30,9}
+%% Tones
+\definecolor{lake-tone}{cmyk}{95,0,3,50} 
+\definecolor{alpine-tone}{cmyk}{80,95,0,50}
+\definecolor{sunset-tone}{cmyk}{5,95,0,50}
+\definecolor{fauna-tone}{cmyk}{0,75,90,50}
+\definecolor{flora-tone}{cmyk}{50,0,100,50}
+\definecolor{kiwi-tone}{cmyk}{0,75,100,85}
+\definecolor{honey-tone}{cmyk}{0,18,100,50}
+%</common>
+%    \end{macrocode}
+%
+% \section{Headings}
+%
+% Some styles need to be able to customise their headings if needed.
+% Notably titlesec breaks beamer, so should not be loaded in that case.
+%    \begin{macrocode}
+%<*common>
+\@ifclassloaded{beamer}{}{\RequirePackage{titlesec}}
+%</common>
+%    \end{macrocode}
+%
+%
+% \subsection{Report}
+% We need to set the headings to be correct
+%
+%    \begin{macrocode}
+%<*report>
+\titleformat{\section}{\color{alpine-tone}\fontsize{14pt}{16.8pt}\bfseries\neue\uppercase}{\thesection.}{1em}{}
+\titleformat{\subsection}{\fontsize{11pt}{13.2pt}\bfseries\neue}{\thesubsection}{1em}{}
+\titleformat{\subsubsection}{\fontsize{11pt}{13.2pt}\bfseries\neue}{\thesubsubsection}{1em}{}
+\titlespacing{\section}{0pt}{\baselineskip}{0pt}
+\titlespacing{\subsection}{0pt}{\baselineskip}{0pt}
+\titlespacing{\subsubsection}{0pt}{\baselineskip}{0pt}
+%</report>
+%    \end{macrocode}
+%
+%
+%
+% \subsection{Beamer}
+%
+%
+%
+% To start with, we want to make sure that frame titles are right alined, 
+% bold, neue and logo blue.
+%
+%    \begin{macrocode}
+%<*beamer>
+\setbeamertemplate{frametitle}[default][right]
+
+\setbeamerfont{frametitle}{family=\neue,series=\bfseries}
+\setbeamercolor{frametitle}{fg=alpine-tone}
+
+\setbeamerfont{framesubtitle}{family=\neue,series=\mdseries}
+\setbeamercolor{framesubtitle}{fg=black}
+%</beamer>
+%    \end{macrocode}
+
+%
+% General slides all have to quote the section name after the title in the header box.
+% If there is a frame subtitle then it is printed instead. 
+%
+%    \begin{macrocode}
+%<*beamer>
+\setbeamertemplate{frametitle}{
+   \ifbeamercolorempty[bg]{frametitle}{}{\nointerlineskip}%
+  \begin{beamercolorbox}[right,wd=\textwidth]{frametitle}
+    \usebeamerfont{frametitle}%
+    \vspace*{2ex}\par%
+    \strut\insertframetitle\strut\par%
+    {%
+      \ifx\insertframesubtitle\@empty{\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertsection\strut\par}%
+      \else%
+      {\usebeamerfont{framesubtitle}\usebeamercolor[fg]{framesubtitle}\insertframesubtitle\strut\par}%
+      \fi
+    }%
+    \vskip-1ex%
+    \if@tempswa\else\vskip-.3cm\fi% set inside beamercolorbox... evil here...
+  \end{beamercolorbox}% 
+}
+%</beamer>
+%    \end{macrocode}
+%
+% \section{Header and Footer}
+%
+% Each document class has it's own settings for headers and footers.
+% As a result every package should use fancyhdr
+%    \begin{macrocode}
+%<common>\usepackage{fancyhdr}
+%    \end{macrocode}
+%
+% \subsection{Letter}
+% There should be no header or footer for letters. 
+%    \begin{macrocode}
+%<letter>\pagestyle{empty}
+%    \end{macrocode}
+%
+% \subsection{Report}
+%
+% Reports have a page number in the bottom left, and the short report title in the 
+% bottom right. There are no head or foot rules. 
+%    \begin{macrocode}
+%<*report>
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \fancyfoot[L]{\color{alpine-tone}\small\neue\bf\thepage}
+    \fancyfoot[R]{\color{grey}\small\neue\bf \footertitle}
+    \renewcommand{\headrulewidth}{0pt} 
+}
+%</report>
+%    \end{macrocode}
+%
+% \subsection{Beamer}
+%
+%    \subsubsection{Meta Data}
+% The presentations require commands to set and store the values used for the 
+% title and normal page footers. These are defined simply with short hand commands
+% to assign a known variable. This is because the footers are not constatnt. Also
+% note that the titlepage footer and general footers are different.
+%
+%    \begin{macrocode}
+%<*beamer>
+\newcommand{\@titlefooter}{}
+\newcommand{\@pagefooter}{}
+\newcommand{\titlefooter}{%
+  \renewcommand{\@titlefooter}%
+}
+\newcommand{\pagefooter}[1]{%
+  \renewcommand{\@pagefooter}{#1}  
+}
+%</beamer>
+%    \end{macrocode}
+%
+%
+% \subsubsection{Footline}
+%
+% The footer should contain the company logo on the left and a message on the right. 
+% The message should be customizable according to the presentation using |\pagefooter|.
+%
+%    \begin{macrocode}
+%<*beamer>
+\setbeamertemplate{footline}{
+\leavevmode
+\begin{beamercolorbox}[left,ht=4ex,dp=4ex,leftskip=0.8cm,wd=0.5\paperwidth]{default text}
+ \includegraphics[width=0.18\textwidth]{logo}
+\end{beamercolorbox}%
+\begin{beamercolorbox}[right,rightskip=2ex,ht=4ex,dp=4ex,wd=0.5\paperwidth]{default text}
+             \hfill   \neue \@pagefooter   
+\end{beamercolorbox}
+}
+%</beamer>
+%    \end{macrocode}
+%
+%
+% \section{Bibliography}
+%
+% Since we are using biblatex with apa we need to use polyglossia to tell
+% biblatex which language we are using. Actually polyglossia doesn't support 
+% british directly so we need a slight hack. We also need the bibliography to be
+% a proper section
+%
+%    \begin{macrocode}
+%<*report>
+\RequirePackage{csquotes}
+\RequirePackage{polyglossia}
+\setdefaultlanguage[variant=newzealand]{english}
+\RequirePackage[style=mfish,backend=biber]{biblatex}
+\DeclareLanguageMapping{english}{english-mfish}
+\defbibheading{bibliography}[References]{\section{#1}}
+%</report>
+%    \end{macrocode}
+%
+% We define some helper cite commands for familiarity. 
+%
+%    \begin{macrocode}
+%<*report>
+\newcommand{\citet}{\cite}
+\newcommand{\citep}{\parencite}
+%</report>
+%    \end{macrocode}
+%
+%
+% \section{Title page}
+%
+% Each kind of documents has a different kind of header. 
+% Each one shall be addressed separately. Additionally,
+% each title page section for a class will be split into two parts:
+% the first defines new commands for entering metadata into the titlepage
+% and the second defines the actual creation of the title page. 
+%
+%    \begin{macrocode}
+%<*common>
+\RequirePackage[absolute,overlay]{textpos}
+\RequirePackage{etoolbox}
+\RequirePackage{xparse}
+\RequirePackage{hyphenat}
+\RequirePackage{graphicx}
+%</common>
+%    \end{macrocode}
+%
+% \subsection{Letter}
+%
+% A letter must have a tile, author and greeting or else it will fail to compile. 
+%
+% The letterhead is printed on the first page without user intervention.
+% There is no case where the letterhead should be ommited. 
+%    \begin{macrocode}
+%<letter>\AfterEndPreamble{\maketitle}
+%    \end{macrocode}
+%
+% \subsubsection{Meta Data}
+%
+% The greeting macro sets the greeting of the document. This command is mandatory
+% and must occur before |\begin{document}|. It takes a single arugment which is 
+% the greeting line and saves it for use in the letter head. E.g |\greeting{Dear John}|.
+% 
+%    \begin{macrocode}
+%<*letter>
+\newcommand{\greeting}[1]{
+  \renewcommand\@greeting{#1}
+}
+%</letter>
+%    \end{macrocode}
+%
+% |\@greeting| contains the value of the greeting to write. This is to be used
+% in printing the title page. This starts of with an error value since it is required.
+%
+%    \begin{macrocode}
+%<*letter>
+\newcommand{\@greeting}{\ClassError{doc-letter}
+{No \noexpand\greeting given}
+{Please insert a \noexpand\greeting before the \noexpand\begin{document} in your file.}
+}
+%</letter>
+%    \end{macrocode}
+%
+% The preamble macro sets the  date and recipient address.
+% This command is not mandatory, but must occur before |\begin{document}|. 
+%
+% The command takes two arugments, a date and an address.
+% We need a little bit of indirection in order to be able to use 
+% |\obeylines| to preserve line breaks (which is also why |\preameble|
+% is point free. 
+%
+%    \begin{macrocode}
+%<*letter>
+\newcommand{\preamble}{\bgroup\obeylines\@preamble@}
+
+\newcommand{\@preamble@}[2]{
+  \gdef\@preamble{
+#1
+
+\vspace*{\parskip}
+\begingroup\setlength{\parskip}{0pt}
+
+#2
+\endgroup
+\vspace*{\parskip}
+}
+\egroup
+}
+%</letter>
+%    \end{macrocode}
+%
+% |\@preamble| contains the address and date for use in the title.
+%
+% This starts of with an empty value since it is not required.
+%    \begin{macrocode}
+%<letter>\newcommand{\@preamble}{}
+%    \end{macrocode}
+%
+%
+% We also introduce a signature command. This is just a helper macro to insert space
+% or a figure (signature) between the closing and the name. This is intended to be used
+% for digital signatures, or leaving space for signing. This preserves linebreaks in 
+% the arguments. As for |\preamble| this requires an indirect point free macro. 
+%
+%    \begin{macrocode}
+%<*letter>
+\newcommand{\signature}{\bgroup\obeylines\@signature}
+
+\NewDocumentCommand{\@signature}{m o m}{
+  \vspace*{\parskip}
+  \vspace*{\parskip}
+  \begingroup
+  \setlength{\parskip}{0pt}
+  #1
+
+\IfNoValueTF{#2}{\vspace*{1.2cm}}{\vspace{1ex}\includegraphics[height=1.2cm]{#2}\vspace{1ex}}
+  
+  #3
+  \endgroup
+}
+%</letter>
+%    \end{macrocode}
+%
+%
+% \subsubsection{Maketitle}
+%    \begin{macrocode}
+%<letter>\renewcommand\maketitle{
+%    \end{macrocode}
+%
+% We want to set up the document such that the pdf has a sensible title and author set. 
+%  
+%    \begin{macrocode}
+%<*letter>
+    \hypersetup{  
+      pdfinfo={  
+        Title={\@title},  
+        Author={\@author}
+      }  
+    }
+%</letter>
+%    \end{macrocode}
+%
+% We now need to place the company details in the top left hand corner.
+%
+%    \begin{macrocode}
+%<*letter>   
+    \begin{textblock*}{\textwidth}(35mm,15mm)
+    \parbox{44mm}{\fontsize{6.5pt}{7.8pt}\selectfont\neue\noindent\rule{40mm}{0.1mm}
+                  Level 5, 158 Victoria St\\
+                  PO Box 27535, Wellington 6141 \\ 
+                  New Zealand}
+    \end{textblock*}
+%</letter>
+%    \end{macrocode}
+% 
+% We place the bottom of the details block separately from the top, as it has
+% an additional specified location.
+
+%    \begin{macrocode}
+%<*letter>
+    \begin{textblock*}{43mm}(51mm,26mm)
+    \parbox{43mm}{\fontsize{6.5pt}{7.8pt}\selectfont\neue +64 4 385 9285 Phone\\
+                  inbox@dragonfly.co.nz
+                  \rule[0.5\baselineskip]{30mm}{0.1mm}
+                  {\fontsize{7.5pt}{8pt}\selectfont\bf\color{alpine-tone}\neue www.dragonfly.co.nz}}
+   \end{textblock*}
+%</letter>
+%    \end{macrocode}
+%
+% The logo is placed in the left margin, such that its right edge is touching the 
+%  margin. 
+%
+%    \begin{macrocode}
+%<*letter>   
+    \begin{textblock*}{37mm}(14mm,47mm)
+        \includegraphics[width=37mm]{logo}
+    \end{textblock*}
+%</letter>
+%    \end{macrocode}
+%
+% This is all that goes in the letter head. At this point we clear all the commands that
+% allow for setting header properties (as is standard in class files). We do not clear the
+% title as we require it for the greeting. 
+%
+%    \begin{macrocode}
+%<*letter>   
+   \global\let\thanks\relax
+  \global\let\maketitle\relax
+  \global\let\@thanks\@empty
+  \global\let\@author\@empty
+  \global\let\@date\@empty
+  \global\let\author\relax
+  \global\let\date\relax
+  \global\let\and\relax
+%</letter>
+%    \end{macrocode}
+%
+% We need to ensure that the text on the first page is moved down so that
+% it starts 73mm down. Note that in order to make the space the right size, we need
+% to subtract the \texttt{baselineskip} and \texttt{parskip}, as they will be 
+% automatically added. 
+%
+%    \begin{macrocode}
+%<*letter>   
+   
+  \vspace*{-\parskip}
+  \vspace*{-\baselineskip}
+  \vspace*{47mm}
+%</letter>
+%    \end{macrocode}
+%
+% At this point we add in the preamble if it has been declared, followed by the greeting.
+%
+%    \begin{macrocode}
+%<*letter>   
+\@preamble 
+
+\@greeting
+
+\textbf{\@title}
+
+\global\let\title\relax
+\global\let\greeting\relax
+\global\let\preamble\relax
+\global\let\@title\@empty 
+\global\let\@greeting\@empty 
+\global\let\@preamble\@empty 
+}
+%</letter>
+%    \end{macrocode}
+%
+% The title block is now finished. 
+%
+% \subsection{Report, Proposal And AEBR}
+%
+% Report are a very strictly specified template the has a large number of fields.
+% Note that since the proposal is a modified report, all these commands exist as well. 
+% Additionaly, since the report template is subsititable for AEBR, all report commands
+% should have an AEBR clone (that will often do nothing). This section will define the
+% common metadata for both the report and AEBR formats.
+%
+% \subsubsection{Meta Data}
+%
+% The document has two titles. The first is the main title which goes on
+% the cover of the document, while the second is a short title that goes 
+% in the page footer. Both are required.  
+%
+%    \begin{macrocode}
+%<*report>
+\renewcommand\title[2]{%
+  \renewcommand\@title{#2}%
+  \renewcommand\footertitle{#1}%
+}
+\newcommand{\footertitle}{\ClassError{doc-report}{No Footer title defined}{Use \noexpand\title}}
+%</report>
+%    \end{macrocode}%
+%
+% Additionally to a full title, the report has a subtitle. This goes below the main
+% title and is included in every document. In the AEBR this is ignored.
+%    \begin{macrocode}
+%<*report>
+\newcommand{\extratitlepage}[1]{\renewcommand\@extratitlepage{#1}}
+\newcommand{\@extratitlepage}{}
+\newcommand{\subtitle}[1]{\renewcommand\@subtitle{#1}}
+\newcommand{\@subtitle}{%
+  \ClassError{doc-report}{No Subtitle Supplied}{Use subtitle}}
+%</report>
+%    \end{macrocode}
+%
+%
+% Reports start with a large title image on the front page.
+% The |\titleimage| macro allows users to specify the image to appear.
+% Ideally the image should be at least 600dpi and ideally 210x110 mm.
+% The image must be 210mm wide, and no more than 110 mm high. The default 
+% Image is the wing pattern as a narrow band. This command is ignored in AEBR.
+%
+%    \begin{macrocode}
+%<*report>
+\newcommand{\@titleimage}{pattern}
+\newcommand{\titleimage}[1]{%
+  \renewcommand{\@titleimage}{#1}
+}
+%</report>
+%    \end{macrocode}
+%
+% In the report the authors list starts with the title ``Authors:'',
+% while in the proposal ``Prepared by:'':
+%    \begin{macrocode}
+%<report>\newcommand\@authorslabel{Authors}
+%<proposal>\renewcommand\@authorslabel{Prepared by}
+%    \end{macrocode}
+%
+% Like in standard document |\date| is allowed. However, it is only used for
+% creating citations, and as such should contain only the year. As such the 
+% default is changed from |\today| to the current year. In the AEBR format there
+% is also a reportmonth command to set the month. 
+%
+%    \begin{macrocode}
+%<*report>
+  \renewcommand{\@date}{\the\year}
+%</report>
+%<report>\newcommand{\reportmonth}[1]{}
+%    \end{macrocode}
+%  
+% Since the report title image is supposed to be a mixture of three images, we 
+% may be required to cite the source of the images. This is also done on 
+% the inside cover. We create three commands that take a licence image name
+% and a source to cite the images. If no images are cited the block does not appear.
+% In the AEBR these do nothing. 
+%
+%    \begin{macrocode}
+%<*report>
+\RequirePackage{lettrine}
+\newcommand{\singleimage}[2]{%
+\renewcommand{\@imagereferences}{Cover image:}
+\renewcommand{\@singleimage}{\lettrine[lines=2,findent=6pt,nindent=0pt]{\includegraphics[height=1.8ex,keepaspectratio]{#1}}{}{\normalfont #2}}
+}
+
+
+\newcommand{\@singleimage}{}
+\newcommand{\@leftimage}{}
+\newcommand{\@middleimage}{}
+\newcommand{\@rightimage}{}
+
+\def\@imagereferences{}
+%</report>
+%
+% Each report may contain a copyright notice. This has an image for the licence,
+% as well as text. 
+%
+%    \begin{macrocode}
+%<*report>
+\newcommand{\licence}[1]{\renewcommand{\@licence}{#1}}
+\newcommand{\@licence}{}
+%</report>
+%    \end{macrocode}
+%
+% AEBR documens require and ISSN, ISBN and report number. All of these must have 
+% sensible defaults for before they are finished. These should not be implemented
+% in report.
+%    \begin{macrocode}
+%<*report>
+\newcommand{\issn}[1]{}
+\newcommand{\isbn}[1]{}
+\newcommand{\reportno}[1]{}
+\newcommand{\reportseries}[1]{}
+\newcommand{\reportwallpaper}[1]{}
+%</report>
+%    \end{macrocode}
+%
+% The report also has a customisable citation note that goes at the end of the 
+% citation. This defaults to the subtitle. 
+%
+%    \begin{macrocode}
+%<*report>
+\newcommand{\citationnote}[1]{\renewcommand{\@citationnote}{#1}}
+\newcommand{\@citationnote}{\@subtitle}
+%</report>
+%    \end{macrocode}
+%
+% \subsection{Report and Propsal}
+%
+% Both the report and the title page share a similar first page, but a different second.
+%
+% \subsubsection{Maketitle}
+%
+% The title page for the report and proposal spans two pages. The first is cover page
+% for the document, while the second is an inside flap that contains additional
+% information.
+%
+%
+% In order to lay out the title page we require a number of additional packages.
+% These are for creating finding out the number of pages, 
+% and adding in a background image. 
+%
+%    \begin{macrocode}
+%<*report|proposal>
+\RequirePackage{wallpaper}
+%</report|proposal>
+%    \end{macrocode}
+%
+% We start now describing the title page. This is also the title page for the 
+% proposal as well. For simplicity, the proposal titlepage is the same as for
+% the report, except that certain parts have been ommitted. 
+%
+% We start by redefining the maketitle command to custmize the title. 
+%    \begin{macrocode}
+%<report|proposal>\RenewDocumentCommand{\maketitle}{}{
+%    \end{macrocode}
+%
+% The title infomation should also be used in the metadata of the PDF. 
+%    \begin{macrocode}
+%<*report|proposal>
+{
+\renewcommand{\and}{, }
+\hypersetup{  
+  pdfinfo={  
+    Title={\footertitle},  
+    Author={\@author}
+  } 
+} 
+}
+%</report|proposal>
+%    \end{macrocode}
+%
+% The title page takes up a whole page which is blank and larger than usual.
+%    \begin{macrocode}
+%<*report|proposal>
+\clearpage
+\newgeometry{top=135mm,bottom=32mm,right=30mm,left=30mm}
+\thispagestyle{empty}
+%</report|proposal>
+%    \end{macrocode}
+%
+% The title page starts with a full page with banner image 10mm from the top
+% of the page. The rules around this image are described in detail where the 
+% title image command is defined. 
+%    \begin{macrocode}
+%<*report|proposal>
+\begin{textblock*}{\paperwidth}(0mm,10mm)
+    % \includegraphics[width=\paperwidth]{\@titleimage}
+\end{textblock*}
+%</report|proposal>
+%    \end{macrocode}
+%
+% The main text is the title of the document in large black neue. It also has some
+% extra spacing following it.
+%    \begin{macrocode}
+%<*report|proposal>
+{\raggedright \bf \neue \fontsize{23}{27.5}\selectfont \nohyphens{\@title}\par }
+\vspace*{8mm}
+\vspace*{-\baselineskip}
+\vspace*{-\parskip}
+
+%</report|proposal>
+%    \end{macrocode}
+%
+% The main title is followed by the subtitle in alpine-tone.
+%    \begin{macrocode}
+%<report|proposal>{\raggedright \bf \color{alpine-tone} \fontsize{11pt}{13.5}\selectfont \nohyphens{\@subtitle}\par}
+%    \end{macrocode}
+%
+%    If you want to put extra content in, you can use the extratitlepage command.
+%    \begin{macrocode}
+%<*report|proposal>
+\vfill%
+      \ifx\@extratitlepage\@empty%
+      \else%
+      {\@extratitlepage}%
+      \fi%
+\vfill%
+\hspace*{90mm}%
+\begin{minipage}[h]{65mm}
+  \fontsize{7.5pt}{9pt}\selectfont\neue
+  {
+    \renewcommand{\and}{\\}
+  \begin{tabular}{l}
+  \textbf{\@authorslabel:}\\
+    \@author
+  \end{tabular}
+  }
+    \vspace{1mm}
+
+    \noindent\rule{51mm}{0.1mm}
+
+    \vspace{4mm}
+
+    \hspace{15mm}
+    \parbox{44mm}{\fontsize{7.5pt}{9pt}\selectfont PO Box 27535, Wellington 6141 \\ 
+                 New Zealand \\ 
+                 \href{www.dragonfly.co.nz}{\bfseries\color{alpine-tone}\neue dragonfly.co.nz}}
+    
+\end{minipage}
+%</report|proposal>
+%    \end{macrocode}
+%    
+% The Dragonfly logo is placed next to the author block. 
+%    \begin{macrocode}
+%<*report|proposal>
+\begin{textblock*}{59mm}(68mm,253mm)
+  % \includegraphics[width=\textwidth]{logo}
+\end{textblock*}
+%</report|proposal>
+%    \end{macrocode}
+%
+% This finishes the title page, and now the inside cover begins.
+% This is a normal size page with no footer and a patterned background. 
+% All text on this page is aligned to the bottom. 
+%    \begin{macrocode}
+%<*report|proposal>
+
+\restoregeometry
+\clearpage
+\thispagestyle{empty}
+\ThisCenterWallPaper{1.0}{wallpaper.png}
+
+\vspace*{\fill}
+%</report|proposal>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*report>
+{\neue \color{alpine-tone} \fontsize{11pt}{13.2pt}\selectfont \textbf{Cover Notes}}
+
+To be cited as:
+
+{
+
+  \begin{refsection}[\jobname-self.bib]
+  \renewcommand{\\}{}
+  \renewcommand*{\multinamedelim}{;\space}
+  \renewcommand*{\finalnamedelim}{;\space}%
+  \renewcommand{\blx@maxcitenames}{25} %The number of authors here can be large
+  \citename{this}[article]{author}\ (\citefield{this}{year}).\ \citefield{this}{title},\ \pageref{LastPage}\ pages.\ \ifdefempty{\@citationnote}{}{\@citationnote.}
+  \end{refsection}
+}
+
+\@licence
+
+\ifx\@imagereferences\@empty%
+\relax%
+\else%
+\@imagereferences
+\@singleimage
+\fi
+
+%</report>
+%<*report|proposal>
+\clearpage
+\pagestyle{plain}
+}
+%</report|proposal>
+%    \end{macrocode}
+%
+%
+% \subsection{Beamer}
+% Beamer title pages are similar to the default beamer ones, but we add some helper
+% function and metadata.
+%
+%    \subsubsection{Meta Data}
+%
+% Dragonfly presentations often contain a project code. This is essentially the 
+% equivalent of institute in a standard beamer document. We define project code
+% to be an alias for institute. 
+%
+%    \begin{macrocode}
+%<*beamer>
+\newcommand{\projectcode}{\institute}
+%</beamer>
+%    \end{macrocode}
+%
+% \subsubsection{Titlepage}
+%
+% We now consider the appearance of the title page. First we set the relevant fonts.
+%
+%    \begin{macrocode}
+%<*beamer>
+\setbeamercolor{title}{fg=alpine-tone}
+\setbeamerfont{title}{family=\neue,series=\bfseries,size={\fontsize{18}{20}}}
+\setbeamercolor{subtitle}{fg=alpine-tone}
+\setbeamerfont{subtitle}{parent=date,family=\neue, series=\bfseries}
+\setbeamerfont{institute}{parent=date,size={\fontsize{10}{12}}}
+%</beamer>
+%    \end{macrocode}
+%
+% Every title page uses the Dragonfly logo at the bottom of the slide. 
+%
+%    \begin{macrocode}
+%<beamer>\titlegraphic{} % \includegraphics[width=0.3\textwidth]{logo}}
+%    \end{macrocode}
+%
+% We now describe the exact layout of the title page. 
+%
+%    \begin{macrocode}
+%<*beamer>
+\setbeamertemplate{title page}
+{
+%</beamer>
+%    \end{macrocode}
+%
+% The top of the title page has a color banner accross the top using a standard
+% doc pattern. 
+%
+%    \begin{macrocode}
+%<*beamer>
+  \vbox{}
+  \vfill
+  \begin{textblock*}{\paperwidth}(0mm,0mm)
+    \includegraphics[width=\paperwidth]{pattern}
+  \end{textblock*}
+%</beamer>
+%    \end{macrocode}
+%
+% The first thing of the page is the title of the presentation. This is followed by
+% a space.
+%
+%    \begin{macrocode}
+%<*beamer>
+  \begin{centering}
+    \begin{beamercolorbox}[sep=8pt,center]{title}
+      \usebeamerfont{title}\inserttitle
+    \end{beamercolorbox}%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%
+    \vskip1em\par
+%</beamer>
+%    \end{macrocode}
+%
+% Following the title is the project code and author. The project code is not always present. It 
+% is currently recorded as the institute to make use of beamers existing implmementation. It is probably
+% necessary to include a |\projectcode| command later. This is followed immediately by the authors.
+%
+%    \begin{macrocode}
+%<*beamer>
+    \begin{beamercolorbox}[center]{author}
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
+      \vspace{0.2cm}
+      \usebeamerfont{date}\insertdate
+      \par
+    \begin{beamercolorbox}[center]{institute}
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}  
+      \par
+      \vfill
+%</beamer>
+%    \end{macrocode}
+% Finally the last element is the company logo.
+%
+%    \begin{macrocode}
+%<*beamer>
+      \vfill
+    {\usebeamercolor[fg]{titlegraphic}\inserttitlegraphic\par}
+  \end{centering}
+}
+%</beamer>
+%    \end{macrocode}
+%
+%
+% Finally, since the titleslide contains more than just the standard title,
+% it also changes the way the page looks, we define a helper function to 
+% insert a title slide.
+%
+%    \begin{macrocode}
+%<*beamer>
+\NewDocumentCommand{\titleslide}{}{
+  \begingroup
+\setbeamertemplate{footline}{
+\begin{beamercolorbox}[ht=3ex,dp=1ex,leftskip=1.4cm,rightskip=1.4cm]{default text}
+    \neue \@titlefooter \vspace*{\baselineskip}
+  \end{beamercolorbox}
+}
+\begin{frame}
+\maketitle
+\end{frame}
+\endgroup
+}
+%</beamer>
+%    \end{macrocode}
+%
+% \section{Table of Contents}
+%
+% Reports requires a table of contents that is formatted in a very specific way.
+%
+%    \begin{macrocode}
+%<report>\RequirePackage{tocloft}
+%    \end{macrocode}
+%
+%
+% Dection heading are always shown in capitals
+% in the contents page. This involves rebinding contents line, so that when the 
+% title is used to construct a hyperref url, it doesn't break the url. This is
+% used in report and AEBR.
+%
+%    \begin{macrocode}
+%<*report>
+\let\doc@contentsline=\contentsline
+\renewcommand\contentsline[4]{\doc@contentsline{#1}{\ifstrequal{#1}{section}{\MakeUppercase{#2}}{#2}}{#3}{#4}}
+%</report>
+%    \end{macrocode}
+%
+%\subsection{Report}
+%  We want the table of contents to be on its own page. So we append 
+% a clear instruction to the end of the writing command
+%
+%    \begin{macrocode}
+%<report>\g@addto@macro\@cfttocfinish{\clearpage}
+%    \end{macrocode}
+%
+% The title of the contents page must be CONTENTS in large, bold, blue neue.
+%
+%    \begin{macrocode}
+%<*report>
+\renewcommand{\cfttoctitlefont}{\color{alpine-tone}\fontsize{14pt}{16.8pt}\bfseries\sffamily}
+\addto\captionsenglish{%
+  \renewcommand{\contentsname}{CONTENTS}
+}
+%</report>
+%    \end{macrocode}
+%
+% In this style the toc should only be created to depth 3.
+%    \begin{macrocode}
+%<report>\setcounter{tocdepth}{3}
+%    \end{macrocode}
+%
+% The numbers for all three level of heading are drawn the same. In gray neue. 
+%
+%    \begin{macrocode}
+%<*report>
+\newcommand{\doc@pagefont}{\fontsize{11pt}{13.2pt}\bfseries\sffamily\color{gray}}
+\renewcommand{\cftsecpagefont}{\doc@pagefont}
+\renewcommand{\cftsubsecpagefont}{\doc@pagefont}
+\renewcommand{\cftsubsubsecpagefont}{\doc@pagefont}
+%</report>
+%    \end{macrocode}
+% 
+% Similarly all the lines between the heading levels are the same. A line of tiny
+% gray dashes.
+%
+%    \begin{macrocode}
+%<*report>
+\renewcommand{\cftdot}{-}
+\renewcommand{\cftdotsep}{1}
+\newcommand{\doc@leader}{\phantom{m}\color{gray}\tiny \cftdotfill{\cftdotsep}\phantom{m}}
+
+\renewcommand{\cftsecleader}{\doc@leader}
+\renewcommand{\cftsubsecleader}{\doc@leader}
+\renewcommand{\cftsubsubsecleader}{\doc@leader}
+%</report>
+%    \end{macrocode}
+%
+%   All levels of heading have the same font for being written in. Bold, black neue. 
+%
+%    \begin{macrocode}
+%<*report>
+\newcommand{\doc@tocfont}{\fontsize{11pt}{13.2pt}\bfseries\sffamily}
+
+\renewcommand{\cftsecfont}{\doc@tocfont}
+\renewcommand{\cftsubsecfont}{\doc@tocfont}
+\renewcommand{\cftsubsubsecfont}{\doc@tocfont}
+%</report>
+%    \end{macrocode}
+%
+% The spacing in the default table of contents is too small for this report format. 
+% As a result, we increase the item spacing to make it less crowded.
+%
+%    \begin{macrocode}
+%<*report>
+\setlength{\cftparskip}{1ex}
+\setlength{\cftbeforesecskip}{2ex}
+%</report>
+%    \end{macrocode}
+%
+%
+% \section{Floats}
+% 
+% Some of the formats have strict rules concerning figures. These are implemented here.
+% \subsection{Report}
+%
+% Reports need special figures and tables that go into the left margin. 
+% To deal with this we will insert some commands into the figure command. 
+% They also have rules about the formatting of the caption text. 
+%
+% We start by telling the caption that it should be wider.
+%    
+%    \begin{macrocode}
+%<report>\RequirePackage[labelsep=colon,singlelinecheck=false,width=150mm]{caption}
+%    \end{macrocode}
+%
+% The captions are written in the neue font, and with a bold Figure label. 
+%
+%    \begin{macrocode}
+%<*report>
+\renewcommand{\captionfont}{\small\neue}
+\renewcommand{\captionlabelfont}{\small\bf\neue}
+%</report>
+%    \end{macrocode}
+%
+% We insert into the start and end of the figure command a 22mm indented minipage. 
+%
+%    \begin{macrocode}
+%<*report>
+\let\oldfigure\figure
+\newcommand{\newfigurehead}{\hspace{-22mm}
+  \addtolength{\textwidth}{22mm}
+  \begin{minipage}[t]{\textwidth}}
+\def\figure{\@ifnextchar[\figure@i \figure@ii}
+\def\figure@i[#1]{\oldfigure[#1]\newfigurehead}
+\def\figure@ii{\oldfigure\newfigurehead}
+
+\let\endoldfigure\endfigure
+\def\endfigure{\end{minipage}\endoldfigure}
+%</report>
+%    \end{macrocode}
+%
+% We then do the same thing for tables. 
+%
+%    \begin{macrocode}
+%<*report>
+\let\oldtable\table
+\newcommand{\newtablehead}{\hspace{-22mm}
+  \addtolength{\textwidth}{22mm}
+  \begin{minipage}[t]{\textwidth}}
+\def\table{\@ifnextchar[\table@i \table@ii}
+\def\table@i[#1]{\oldtable[#1]\newtablehead}
+\def\table@ii{\oldtable\newtablehead}
+
+\let\endoldtable\endtable
+\def\endtable{\end{minipage}\endoldtable}
+%</report>
+%    \end{macrocode}
+%
+%
+%
+% \section{Draft mode}
+%
+% Draft mode should create a watermark accross every page to make them as draft.
+% It should also turn on double spacing and some line numbering for ease of editing.
+% For clarity line numbers and double spacing will only start \emph{after} the title
+% page.
+%    \begin{macrocode}
+%<*common>
+\RequirePackage{setspace}
+\RequirePackage{ifdraft}
+\ifdraft{
+\RequirePackage{draftwatermark}
+\usepackage[modulo]{lineno}
+\SetWatermarkColor{black!15}
+\SetWatermarkFontSize{62pt}
+\SetWatermarkText{\sffamily DRAFT - Not to be quoted}
+
+\AtEndPreamble{
+\g@addto@macro\maketitle{
+\linenumbers
+\doublespacing
+}
+}
+}{}
+%</common>
+%    \end{macrocode}
+%
+%  \section{Additional Packages}
+% The hyperref package must be the last one loaded, so we load it here.
+% We also load booktabs as that is expected to be used for all tables. 
+%
+%    \begin{macrocode}
+%<*common>
+\RequirePackage{booktabs}
+\RequirePackage{hyperref}
+%</common>
+%    \end{macrocode}
+%
+%    Hyperref should be used, but the links should not be coloured or have boxes around
+% them. 
+%    \begin{macrocode}
+%<*common>
+\hypersetup{
+  colorlinks=true,
+  urlcolor=black,
+  citecolor=black,
+  anchorcolor=black,
+  pagecolor=black,
+  menucolor=black,
+  linkcolor=black
+}
+%</common>
+%    \end{macrocode}
+%
+% \section{Self Citing}
+%
+% In order to automatically generate the citation using biblatex, we
+% write out a generated bib file that contains an entry for the current document.
+% This must happen at the end of the prelude, so that the title and so on are defined.
+% Note that new lines have the be suppressed while doing this, and |\emph| commands
+% need to print out the command rather than actually do emphasis. 
+%
+%    \begin{macrocode}
+%<*report>
+\RequirePackage{lastpage}
+\AtBeginDocument{
+{
+\renewcommand{\and}{ and }
+\renewcommand{\emph}[1]{\@backslashchar emph\@charlb #1\@charrb}
+\renewcommand{\\}{}
+\edef\text{@article\@charlb this,^^J%
+options = \@charlb skipbib \@charrb,^^J%
+year = \@charlb \@date \@charrb,^^J%
+title = \@charlb \@title \@charrb,^^J%
+author = \@charlb \@author \@charrb,^^J%
+%</report>
+%<*report>
+\@charrb
+}
+\newwrite\tempfile
+\immediate\openout\tempfile=\jobname-self.bib
+\immediate\write\tempfile{\text}
+\immediate\closeout\tempfile
+}
+}
+%</report>
+%    \end{macrocode}
+%
+%
+% \section{Report}
+%
+%
+% Reports contain an unnumbered summary section. We create a special command
+% for putting this in.
+%
+%    \begin{macrocode}
+%<*report>
+\NewDocumentCommand{\summary}{O {Executive Summary}}{
+  \phantomsection
+  \addcontentsline{toc}{section}{\hspace{1.4em}#1}
+  \section*{#1}
+}
+%</report>
+%    \end{macrocode}
+%
+% \subsection{Creative commons reuse}
+%
+% Where possible, reports are licensed for re-use under a creative commons
+% license. The copyright may be held by the crown or by Dragonfly. A creative
+% commons attribution license is used.
+%
+%    \begin{macrocode}
+%<*report>
+\RequirePackage{lettrine}
+\newcommand{\bydragonfly}{
+  \lettrine[lines=2, findent=4pt]{\includegraphics[height=2ex]{by}}{}
+  Copyright Dragonfly Data Science \textcopyright{} This report is licensed for re-use under a Creative
+Commons Attribution 3.0 New Zealand Licence. This allows you to distribute,
+use, and build upon this work, provided credit is given to the original source.
+}
+\newcommand{\bycrown}{
+  \lettrine[lines=2]{\includegraphics[height=2ex]{by}}{}
+  Crown copyright \textcopyright{} This report is licensed for re-use under a Creative
+Commons Attribution 3.0 New Zealand Licence. This allows you to distribute,
+use, and build upon this work, provided credit is given to the original source.
+}
+\newcommand{\ccby}[1]{
+  \lettrine[lines=2]{\includegraphics[height=2ex]{by}}{}
+  Copyright #1. This report is licensed for re-use under a Creative
+Commons Attribution 3.0 New Zealand Licence. This allows you to distribute,
+use, and build upon this work, provided credit is given to the original source.
+}
+%</report>
+%    \end{macrocode}
+%
+%
+% 
+% \section{Beamer}
+%
+%
+% We need to disable the navigational symbols put in the bottom right of the slides. 
+%
+%    \begin{macrocode}
+%<beamer>\setbeamertemplate{navigation symbols}{}
+%    \end{macrocode}
+%
+%
+% We need a helper function to insert slides which are just a single image with no title
+% or other text. Ideally the image should be at least a little bit centered. 
+%
+%    \begin{macrocode}
+%<*beamer>
+\NewDocumentCommand{\imageslide}{m O {w} o}{
+  \begingroup
+  \usebackgroundtemplate{
+    \vbox to \paperheight{\vfil\hbox to \paperwidth{\hfil%
+        \begingroup
+        \if#2w%
+           {\newcommand{\doc@imagewidth}{\paperwidth}
+             \IfNoValueTF{#3}{\includegraphics[width=\doc@imagewidth]{#1}}%
+                         {\includegraphics[width=\doc@imagewidth,#3]{#1}}}
+           \else%
+               {\newcommand{\doc@imageheight}{\paperheight}
+                 \IfNoValueTF{#3}{\includegraphics[height=\doc@imageheight]{#1}}%
+                             {\includegraphics[height=\doc@imageheight,#3]{#1}}}
+               \fi%     
+               \endgroup
+               \hfil}\vfil}
+  }
+  \begin{frame}[plain]
+  \end{frame}
+  \endgroup
+}
+%</beamer>
+%    \end{macrocode}
+%
+%The beamer template ends by stopping being specific to presentation
+%    \begin{macrocode}
+%<beamer>\mode<all>
+%    \end{macrocode}
+%
+%
+% \section{Appendicies}
+%
+%
+% We require appendicies to be printed as ``Appendix X'' in the table of 
+% contents. This is accomplished by using a the appendix package with the
+% titletoc option. 
+%    \begin{macrocode}
+%<*report>
+\RequirePackage[titletoc]{appendix}
+%</report>
+%    \end{macrocode}
+%
+% In the appendix we also wish to customize a number of properties. To do this
+% we simply add these to the |\appendics| command.  These are:
+% \begin{itemize}
+%\item Section headings printed as Appendix X 
+%\item Tables, equations and figures get the appendix letter before their number
+%\item Counters are reset to set
+% \end{itemize}
+%    \begin{macrocode}
+%<*report>
+\g@addto@macro\appendices{
+%</report>
+%<report>\titleformat{\section}{\color{alpine-tone}\fontsize{14pt}{16.8pt}\bfseries\neue\uppercase}{APPENDIX \thesection }{1em}{}
+%<*report>
+\titleformat{\section}{\bfseries\sffamily}{APPENDIX \thesection }{1em}{}
+\renewcommand{\theequation}{\thesection-\arabic{equation}}
+\renewcommand{\thetable}{\thesection-\arabic{table}}
+\renewcommand{\thefigure}{\thesection-\arabic{figure}}
+\setcounter{section}{0}  % reset counter 
+\setcounter{figure}{0}  % reset counter 
+\setcounter{table}{0}  % reset counter 
+\setcounter{equation}{0}  % reset counter 
+}
+%</report>
+%    \end{macrocode}
+\endinput
